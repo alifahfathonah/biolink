@@ -15,7 +15,7 @@
 
   <link href="<?php echo base_url('assets/') ?>css/bootstrap-toggle.min.css" rel="stylesheet">
 
-  <style type="text/css"> 
+  <style type="text/css">  
     .image-upload>input {
       display: none;
     }
@@ -27,9 +27,26 @@
     background-size: cover;
 }">
   <section id="content" class="wrapper-md animated fadeInDown">
+    
+    <style scoped='' type='text/css'>
+    .fixed-leftSd,.fixed-rightSd{position:fixed;width:200px;height:auto;z-index:9999;transform:translateZ(0)}
+    .fixed-leftSd{left:0}
+    .fixed-rightSd{right:0}
+    .close-fixedSd{position:absolute;width:160px;height:15px;line-height:15px;font-size:11px;font-weight:400;top:-15px;left:0;text-align:center;background:#e0e0e0;color:#666;padding:5px 0;cursor:pointer}
+    @media screen and (max-width:800px){.fixed-leftSd,.fixed-rightSd{display:none;visibility:hidden;}}
+    </style>
+    <div class="fixed-leftSd">
+        <!--iklan kiri-->
+        <?php echo @$iklan['iklan_kiri'] ?>
+    </div>
+    <div class="fixed-rightSd">
+        <!--iklan kanan-->
+        <?php echo @$iklan['iklan_kanan'] ?>
+    </div>
+
     <div class="container aside-xxxl">
       <br/>
-      
+
       <section class="panel panel-default bg-white" style="box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.2), 0 3px 17px 0 rgba(0, 0, 0, 0.19); margin-bottom: 3%; border-radius: 5px;">
         <form method="POST" id="form" action="<?php echo base_url('login/add') ?>" class="panel-body wrapper-lg" enctype="multipart/form-data">
 
@@ -192,6 +209,21 @@
       </div>
     </div>
   </div>
+
+<!-- iklan bawah -->
+<style type='text/css'> .stickywrap{width:100%;margin:auto;text-align:center;float:none;overflow:hidden;display:scroll;position:fixed;bottom:0;z-index:9999}@media only screen and (min-width: 981px) {.stickyzone,#close-stickyb {display: none !important;}}.stickyzone{text-align:center;display:block;max-width:970px;height:auto;overflow:hidden;margin:auto} .stickyzone img{max-width:100%;height:auto;vertical-align:middle} .stickyclose{cursor:pointer;text-align:center} </style> <script type='text/javascript'> $(document).ready(function({$('img#closed').click(function(){$('#bl_banner').hide(90);});}); </script> 
+
+<div id='stickyb' class='stickywrap'>   
+  <div>
+    <a id='close-stickyb' onclick="document.getElementById('stickyb').style.display = 'none';"><img alt='close' src='https://3.bp.blogspot.com/-6LAwZExOdHM/Xh7fAY_R5rI/AAAAAAAACB0/gHeIT7IiNKs51DmS34eoBwalg9tiL42AgCNcBGAsYHQ/s1600/sevenclose.png' title='Close this ad' class='stickyclose'/></a>
+  </div> 
+  <div class='stickyzone'> 
+
+       <!--iklan kanan-->
+       <?php echo @$iklan['iklan_bawah'] ?>
+
+  </div> 
+</div>
 
   <!-- footer -->
   <!-- <footer id="footer">

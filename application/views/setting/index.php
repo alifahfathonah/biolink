@@ -1,6 +1,6 @@
 
         <!-- /.aside -->
-        <section id="content"> 
+        <section id="content">  
           <section class="vbox">           
             <section class="scrollable padder">
               <ul class="breadcrumb no-border no-radius b-b b-light pull-in">
@@ -92,6 +92,33 @@
                         </div>
 
                         <div class="form-group">
+                          <label><i class="fa fa-thumb-tack"></i> Social media that are added</label>
+                          <br/>
+
+                          <?php foreach ($sosmed_data as $key): ?>
+                            
+                            <button onclick="sosmed('<?php echo $key['sosmed_id'] ?>')" type="button"><img src="<?php echo base_url('assets/images/sosmed/'.$key['sosmed_icon']) ?>" width="30" height="30"></button>
+
+                          <?php endforeach ?>
+
+                        </div>
+                        <div class="form-group">
+                          <button id="addRow" type="button" class="btn btn-primary">Account <i class="fa fa-plus"></i></button>
+                          <small style="display: block;" class="text-danger">* add another account</small>
+
+                          <input type="hidden" name="number" id="number" value="0">
+
+                          <div style="margin-top: 1%;">
+                            <div class="row" id="newRow">
+                              
+                            </div>
+                          </div>
+
+                        </div>
+
+                        <hr>
+
+                        <div class="form-group">
                           <input onchange="test()" <?= ($data['account_branding_status'] == '1')? 'checked':'' ?> type="checkbox" data-toggle="toggle" data-size="small">
                           <input name="account_branding_status" type="hidden" id="change" value="<?php echo $data['account_branding_status'] ?>">
                         </div>
@@ -125,7 +152,7 @@
             </section>
           </section>
 
-<!-- Modal -->
+<!-- Modal preset -->
   <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -146,6 +173,46 @@
       </div> 
     </div>
   </div>
+
+<!--modal sosmed-->
+<div class="modal fade" id="sosmed" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        
+        <form method="POST" enctype="multipart/form-data" action="<?php echo base_url('setting/sosmed_update') ?>">
+         
+         <input type="hidden" id="sosmed_id" name="sosmed_id">
+
+          <div class="form-group">
+            <label>Name</label>
+            <input type="text" required="" id="sosmed_name" name="sosmed_name" placeholder="Sosial media name" class="form-control">
+          </div>
+          <div class="form-group">
+            <label>Link / Url</label>
+            <input type="text" required="" id="sosmed_link" name="sosmed_link" placeholder="Link sosial media" class="form-control">
+          </div>
+          <div class="form-group">
+            <label>Icon</label>
+            
+            <input type="file" name="sosmed_icon" class="form-control">
+          </div>
+          <div class="form-group">
+            <label>Color</label>
+            <input type="color" required="" id="sosmed_color" name="sosmed_color" class="form-control">
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-success">Update <i class="fa fa-check"></i></button>
+
+            <a id="sosmed_delete" href=""><button type="button" class="btn btn-danger">Remove <i class="fa fa-times"></i></button></a>
+          </div>
+
+        </form>
+
+      </div>
+    </div> 
+  </div>
+</div>
   
 
 <script type="text/javascript">
@@ -263,5 +330,71 @@ function copyToClipboard(element) {
   document.execCommand("copy");
   $temp.remove();
   swal("Sukses", "Url berhasil di copy", "success");
+}
+
+
+// add row sosmed
+$("#addRow").click(function () {
+      var i = $('#number').val();
+
+      var html = '';
+    
+      html += '<div id="inputFormRow">';
+      html += '<div class="col-md-3">';
+          html += '<label>Name</label>';
+          html += '<input type="text" required="" name="sosmed_name[]" placeholder="Sosial media name" class="form-control">';
+        html += '</div>';
+        html += '<div class="col-md-3">';
+          html += '<label>Link / Url</label>';
+          html += '<input type="text" required="" name="sosmed_link[]" placeholder="Link sosial media" class="form-control">';
+        html += '</div>';
+        html += '<div class="col-md-3">';
+          html += '<label>Icon</label>';
+          html += '<input type="file" required="" name="sosmed_icon'+i+'" multiple="multiple" class="form-control">';
+        html += '</div>';
+        html += '<div class="col-md-3">';
+          html += '<label>Color</label>';
+          html += '<input type="color" required="" name="sosmed_color[]" class="form-control">';
+        html += '</div>';
+        // html += '<div class="col-md-1">';
+        //  html += '<label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</label>';
+        //   html += '<button id="removeRow" class="btn btn-danger" type="button"><i class="fa fa-times"></i></button>';
+        // html += '</div>';
+        html += '<div>';
+        html += '<div class="clearfix"></div><br/>';
+
+    $('#newRow').append(html);
+
+
+    //tambah
+    var n = parseInt(i)+1;
+    $('#number').val(n);
+});
+
+// remove row
+$(document).on('click', '#removeRow', function () {
+    $(this).closest('#inputFormRow').remove();
+});
+
+function sosmed(id){
+  $.ajax({
+    url: '<?php echo base_url('setting/getsosmed') ?>',
+    type: 'POST',
+    dataType: 'json',
+    data: {id: id},
+  })
+  .done(function(data) {
+    var sosmed_id = data[0]['sosmed_id'];
+
+    $('#sosmed_id').val(sosmed_id); 
+    $('#sosmed_name').val(data[0]['sosmed_name']);
+    $('#sosmed_color').val(data[0]['sosmed_color']);
+    $('#sosmed_link').val(data[0]['sosmed_link']);
+
+    $('#sosmed_delete').attr('href', '<?php echo base_url('setting/sosmed_delete/') ?>'+sosmed_id);
+
+    $('#sosmed').modal('toggle');
+
+  });
 }
 </script>

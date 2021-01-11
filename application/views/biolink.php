@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="link-html">
+<html lang="en" class="link-html"> 
     <head>
         <title><?php echo $user['user_nama'] ?></title>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
@@ -77,6 +77,16 @@
                                 </div>
                             </div>  
                         <?php endif ?>
+
+                        <?php foreach (@$sosmed_data as $key): ?>
+                            <div data-link-id="57">
+                                <div class="my-3">
+                                    <a target="_BLANK" href="<?php echo $key['sosmed_link'] ?>" class="btn btn-block btn-default link-btn link-btn-rounded animated infinite false delay-2s" style="background: <?php echo $key['sosmed_color'] ?>;">
+                                        <img src="<?php echo base_url('assets/images/sosmed/'.$key['sosmed_icon']) ?>" width="20" height="20"> <?php echo $key['sosmed_name'] ?>    
+                                    </a>
+                                </div>
+                            </div>  
+                        <?php endforeach ?>
 
                     </main>
 

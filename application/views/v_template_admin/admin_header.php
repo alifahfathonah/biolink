@@ -107,6 +107,15 @@
                       </a>
                     </li>
 
+                    <li  <?php echo @$iklan_active ?>>
+                      <a href="<?php echo base_url('iklan') ?>" >
+                        <i class="fa fa-chain-broken icon">
+                          <b class="bg-light dker"></b>
+                        </i>
+                        <span>Iklan</span>
+                      </a>
+                    </li>
+
                     <li <?php echo @$notifikasi_active ?>>
                       <a href="<?php echo base_url('notifikasi') ?>"  >
 
@@ -125,6 +134,15 @@
                     </li>
 
                     <?php endif ?>
+
+                    <li  <?php echo @$age_active ?>>
+                      <a href="<?php echo base_url('age') ?>" >
+                        <i class="fa fa-clock-o icon">
+                          <b class="bg-light dker"></b>
+                        </i>
+                        <span>Age Calculator</span>
+                      </a>
+                    </li>
 
                     <li  <?php echo @$profile_active ?>>
                       <a href="<?php echo base_url('profile') ?>" >

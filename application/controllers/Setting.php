@@ -2,7 +2,7 @@
 class Setting extends CI_Controller{
 
 	function __construct(){
-		parent::__construct();
+		parent::__construct();  
 	} 
 	function index(){
 		if ( $this->session->userdata('login') == 1) { 
@@ -13,6 +13,9 @@ class Setting extends CI_Controller{
 			$data['preset_data'] = $this->db->query("SELECT * FROM t_preset WHERE preset_hapus = 0")->result_array();
 
 			$data['data'] = $this->db->query("SELECT * FROM t_account WHERE account_email = '$email'")->row_array();
+
+			$id = $this->session->userdata('user_id');
+			$data['sosmed_data'] = $this->db->query("SELECT * FROM t_sosmed WHERE sosmed_user = '$id' AND sosmed_hapus = 0")->result_array();
 
 		    $this->load->view('v_template_admin/admin_header',$data);
 		    $this->load->view('setting/index');
@@ -66,6 +69,7 @@ class Setting extends CI_Controller{
 				$this->db->set($setaccount);
 				$this->db->update('t_account');
 
+				$this->session->set_flashdata('sukses','Data berhasil di simpan');
 			} else {
 				$this->session->set_flashdata('gagal','Data gagal di simpan');
 				redirect(base_url('setting'));
@@ -91,9 +95,140 @@ class Setting extends CI_Controller{
 			$this->db->where('account_email',$email);
 			$this->db->set($setaccount);
 			$this->db->update('t_account');
+
+			$this->session->set_flashdata('sukses','Data berhasil di simpan');
 		}
-		
-		$this->session->set_flashdata('sukses','Data berhasil di simpan');
+
+		$jum = @$_POST['number'];
+
+		if ($jum > 0) {
+
+			for ($i=0; $i < $jum; $i++) { 
+
+
+				$config = array(
+				  'upload_path' 	=> './assets/images/sosmed',
+				  'allowed_types' 	=> "jpg|png|jpeg",
+				  'overwrite' 		=> TRUE,
+				  'max_size' 		=> "12048000",
+				  );
+
+				//upload foto
+				$this->load->library('upload', $config);
+
+				if ($this->upload->do_upload('sosmed_icon'.$i)) {
+
+					//replace Karakter name foto
+					$name_foto = @$_FILES['sosmed_icon'.$i]['name'];
+					$char = array('!', '&', '?', '/', '/\/', ':', ';', '#', '<', '>', '=', '^', '@', '~', '`', '{', '}', ' ');
+			        $foto = str_replace($char, '_', $name_foto);
+			        $char1 = array('[',']');
+			        $foto1 = str_replace($char1, '', $foto);
+
+			        $set_sosmed = array(	
+											'sosmed_user' => $this->session->userdata('user_id'),
+											'sosmed_name' => @$_POST['sosmed_name'][$i],
+											'sosmed_link' => @$_POST['sosmed_link'][$i],
+											'sosmed_icon' => @$foto1,
+											'sosmed_color' => @$_POST['sosmed_color'][$i],
+											'sosmed_tanggal' => date('Y-m-d'), 
+										);
+
+					$this->db->set($set_sosmed);
+					$this->db->insert('t_sosmed');
+
+					$this->session->set_flashdata('sukses','Data berhasil di simpan');
+			     }else{
+
+			     	$this->session->set_flashdata('gagal','Format gambar tidak sesuai');
+			     }
+			}
+		}
+
+		redirect(base_url('setting'));
+	}
+
+	function sosmed_update(){
+		$id = $_POST['sosmed_id'];
+
+		if (@$_FILES['sosmed_icon']['name']) {
+			//dengan foto
+
+			$config = array(
+			  'upload_path' 	=> './assets/images/sosmed',
+			  'allowed_types' 	=> "jpg|png|jpeg",
+			  'overwrite' 		=> TRUE,
+			  'max_size' 		=> "12048000",
+			  );
+
+			//upload foto
+			$this->load->library('upload', $config);
+
+			if ($this->upload->do_upload('sosmed_icon')) {
+
+				//replace Karakter name foto
+				$name_foto = @$_FILES['sosmed_icon']['name'];
+				$char = array('!', '&', '?', '/', '/\/', ':', ';', '#', '<', '>', '=', '^', '@', '~', '`', '{', '}', ' ');
+		        $foto = str_replace($char, '_', $name_foto);
+		        $char1 = array('[',']');
+		        $foto1 = str_replace($char1, '', $foto);
+
+		        $set_sosmed = array(	
+										'sosmed_name' => @$_POST['sosmed_name'],
+										'sosmed_link' => @$_POST['sosmed_link'],
+										'sosmed_icon' => @$foto1,
+										'sosmed_color' => @$_POST['sosmed_color'], 
+									);
+
+		        $this->db->where('sosmed_id',$id);
+				$this->db->set($set_sosmed);
+				$this->db->update('t_sosmed');
+
+				$this->session->set_flashdata('sukses','Data berhasil di simpan');
+		     }else{
+
+		     	$this->session->set_flashdata('gagal','Format gambar tidak sesuai');
+		     }
+
+		}else{
+			//tanpa foto
+
+			$set_sosmed = array(	
+									'sosmed_name' => @$_POST['sosmed_name'],
+									'sosmed_link' => @$_POST['sosmed_link'],
+									'sosmed_color' => @$_POST['sosmed_color'], 
+								);
+
+	        $this->db->where('sosmed_id',$id);
+			$this->db->set($set_sosmed);
+			if ($this->db->update('t_sosmed')) {
+				$this->session->set_flashdata('sukses','Data berhasil di simpan');
+	     	}else{
+
+	     		$this->session->set_flashdata('gagal','Data gagal di simpan');
+	     	}
+			
+		}
+
 		redirect(base_url('setting'));
 	} 
+	function sosmed_delete($id){
+		$this->db->where('sosmed_id',$id);
+		$this->db->set('sosmed_hapus',1);
+
+		if ($this->db->update('t_sosmed')) {
+			$this->session->set_flashdata('sukses','Data berhasil di hapus');
+	     }else{
+
+	     	$this->session->set_flashdata('gagal','Data gagal di hapus');
+	     }
+		redirect(base_url('setting'));
+	}
+	function getsosmed(){
+		$id = $_POST['id'];
+
+		$data = $this->db->query("SELECT * FROM t_sosmed WHERE sosmed_id = '$id' AND sosmed_hapus = 0")->result_array();
+
+		echo json_encode($data);
+	}
 }

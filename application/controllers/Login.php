@@ -1,11 +1,11 @@
 <?php
 class Login extends CI_Controller{
 
-	function __construct(){
+	function __construct(){ 
 		parent::__construct();
 	} 
 	function index(){
-		//menu login 
+		//menu login  
 		$this->load->view('login');
 	}  
 	function auth(){ 
@@ -41,6 +41,7 @@ class Login extends CI_Controller{
 		$cek = $this->db->query("SELECT * FROM t_registrasi WHERE registrasi_power = 1")->num_rows();
 		if ($cek > 0) {
 			$data['preset_data'] = $this->db->query("SELECT * FROM t_preset WHERE preset_hapus = 0")->result_array();
+			$data['iklan'] = $this->db->query("SELECT * FROM t_iklan")->row_array();
 			$this->load->view('signup',$data);
 		} else {
 			//gagal login
@@ -97,7 +98,7 @@ class Login extends CI_Controller{
         	$setuser = array(
 								'user_nama' => $_POST['user_nama'],
 								'user_email' => $_POST['user_email'],
-								'user_password' => $_POST['user_password'],
+								'user_password' => md5($_POST['user_password']),
 								'user_level' => 2,
 								'user_foto' => $foto1,
 								'user_tanggal' => date('Y-m-d'), 
