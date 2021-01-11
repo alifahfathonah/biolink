@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 10 Des 2020 pada 20.43
+-- Generation Time: 11 Jan 2021 pada 14.43
 -- Versi Server: 10.1.13-MariaDB
 -- PHP Version: 7.0.6
 
@@ -51,7 +51,7 @@ CREATE TABLE `t_account` (
 --
 
 INSERT INTO `t_account` (`account_id`, `account_email`, `account_url`, `account_title`, `account_deskripsi`, `account_teks`, `account_bg_type`, `account_bg`, `account_preset`, `account_twitter`, `account_instagram`, `account_facebook`, `account_youtube`, `account_branding_status`, `account_branding_name`, `account_branding_analytics`, `account_branding_url`) VALUES
-(7, 'bagaspramono78@gmail.com', 'bagas78', 'Belajar Ngoding', 'disini tempatnya belajar ngoding', '#f2f2f2', 'preset', 'a612a0166e07ced49e2942d2e43009a5.jpg', 'zelenyi-fon-tekstura-abstract-background-green-color.jpg', 'https://twitter.com/sarahvi10064221', 'https://www.instagram.com/sarahvilo.id/?hl=id', 'https://www.facebook.com/vilooo.id/', 'https://www.youtube.com/channel/UCXL90_ZHbh-EEwkyV_Tfp2A', '1', 'Bagas78', 'analitik', 'url');
+(7, 'bagaspramono78@gmail.com', 'bagas78', 'Belajar Ngoding', 'disini tempatnya belajar ngoding', '#f2f2f2', 'preset', 'a612a0166e07ced49e2942d2e43009a5.jpg', 'zelenyi-fon-tekstura-abstract-background-green-color.jpg', 'https://twitter.com/sarahvi10064221', 'https://www.instagram.com/sarahvilo.id/?hl=id', 'https://www.facebook.com/vilooo.id/', 'https://www.youtube.com/channel/UCXL90_ZHbh-EEwkyV_Tfp2A', '1', 'Bagas78', '', '');
 
 -- --------------------------------------------------------
 
@@ -78,6 +78,28 @@ CREATE TABLE `t_detail` (
 INSERT INTO `t_detail` (`detail_id`, `detail_user`, `detail_tempat_lahir`, `detail_tanggal_lahir`, `detail_umur`, `detail_alamat`, `detail_nohp`, `detail_ktp`, `detail_tanggal`) VALUES
 (1, 2, 'Blitar', '1999-01-19', '21', 'Dsn. Krajan RT01 RW01 Ds. Sumberjo Kec. Kademangan Kab. Blitar', '085855011542', '35046883789393', '2020-12-05'),
 (2, 5, '', '0000-00-00', '', '', '', '', '2020-12-10');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `t_iklan`
+--
+
+CREATE TABLE `t_iklan` (
+  `iklan_id` int(11) NOT NULL,
+  `iklan_kiri` text NOT NULL,
+  `iklan_kanan` text NOT NULL,
+  `iklan_atas` text NOT NULL,
+  `iklan_bawah` text NOT NULL,
+  `iklan_tanggal` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `t_iklan`
+--
+
+INSERT INTO `t_iklan` (`iklan_id`, `iklan_kiri`, `iklan_kanan`, `iklan_atas`, `iklan_bawah`, `iklan_tanggal`) VALUES
+(1, '<a href="https://panel.niagahoster.co.id/ref/71144" target="_blank"><img src="https://panel.niagahoster.co.id/banners/Set3-niagahoster-160x600.png" alt="Hosting Unlimited Indonesia" border="0" width="160" height="600" /></a>', '<a href="https://panel.niagahoster.co.id/ref/71144" target="_blank"><img src="https://panel.niagahoster.co.id/banners/Set3-niagahoster-160x600.png" alt="Hosting Unlimited Indonesia" border="0" width="160" height="600" /></a>', '', '<a href="https://panel.niagahoster.co.id/ref/71144" target="_blank"><img src="https://niagaspace.sgp1.cdn.digitaloceanspaces.com/assets/images/affiliasi/banner/ads-persona-offline-to-online-business-cloud-hosting-affiliate-728-x-90.png" alt="Cloud Hosting Indonesia" border="0" width="728" height="90" /></a>', '2021-01-11');
 
 -- --------------------------------------------------------
 
@@ -162,6 +184,31 @@ INSERT INTO `t_registrasi` (`registrasi_id`, `registrasi_user`, `registrasi_star
 -- --------------------------------------------------------
 
 --
+-- Struktur dari tabel `t_sosmed`
+--
+
+CREATE TABLE `t_sosmed` (
+  `sosmed_id` int(11) NOT NULL,
+  `sosmed_user` int(11) NOT NULL,
+  `sosmed_name` text NOT NULL,
+  `sosmed_link` text NOT NULL,
+  `sosmed_icon` text NOT NULL,
+  `sosmed_color` text NOT NULL,
+  `sosmed_tanggal` date DEFAULT NULL,
+  `sosmed_hapus` int(11) DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `t_sosmed`
+--
+
+INSERT INTO `t_sosmed` (`sosmed_id`, `sosmed_user`, `sosmed_name`, `sosmed_link`, `sosmed_icon`, `sosmed_color`, `sosmed_tanggal`, `sosmed_hapus`) VALUES
+(18, 5, 'Whatsapp', 'https://web.whatsapp.com/', 'wa.png', '#2ca540', '2021-01-11', 0),
+(19, 5, 'Telegram', 'https://web.telegram.org/', 'telegram.png', '#ffee00', '2021-01-11', 0);
+
+-- --------------------------------------------------------
+
+--
 -- Struktur dari tabel `t_user`
 --
 
@@ -201,6 +248,12 @@ ALTER TABLE `t_detail`
   ADD PRIMARY KEY (`detail_id`);
 
 --
+-- Indexes for table `t_iklan`
+--
+ALTER TABLE `t_iklan`
+  ADD PRIMARY KEY (`iklan_id`);
+
+--
 -- Indexes for table `t_notifikasi`
 --
 ALTER TABLE `t_notifikasi`
@@ -217,6 +270,12 @@ ALTER TABLE `t_preset`
 --
 ALTER TABLE `t_registrasi`
   ADD PRIMARY KEY (`registrasi_id`);
+
+--
+-- Indexes for table `t_sosmed`
+--
+ALTER TABLE `t_sosmed`
+  ADD PRIMARY KEY (`sosmed_id`);
 
 --
 -- Indexes for table `t_user`
@@ -239,6 +298,11 @@ ALTER TABLE `t_account`
 ALTER TABLE `t_detail`
   MODIFY `detail_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
+-- AUTO_INCREMENT for table `t_iklan`
+--
+ALTER TABLE `t_iklan`
+  MODIFY `iklan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
 -- AUTO_INCREMENT for table `t_notifikasi`
 --
 ALTER TABLE `t_notifikasi`
@@ -253,6 +317,11 @@ ALTER TABLE `t_preset`
 --
 ALTER TABLE `t_registrasi`
   MODIFY `registrasi_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+--
+-- AUTO_INCREMENT for table `t_sosmed`
+--
+ALTER TABLE `t_sosmed`
+  MODIFY `sosmed_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 --
 -- AUTO_INCREMENT for table `t_user`
 --
