@@ -3,19 +3,21 @@ class Setting extends CI_Controller{
 
 	function __construct(){
 		parent::__construct();  
-	} 
+	}  
 	function index(){
 		if ( $this->session->userdata('login') == 1) { 
 			$data['title'] = 'Setting';
 			$data['setting_active'] = 'class="active"';
 			$email = $this->session->userdata('user_email');
+			$id = $this->session->userdata('user_id');
 
 			$data['preset_data'] = $this->db->query("SELECT * FROM t_preset WHERE preset_hapus = 0")->result_array();
 
 			$data['data'] = $this->db->query("SELECT * FROM t_account WHERE account_email = '$email'")->row_array();
 
-			$id = $this->session->userdata('user_id');
 			$data['sosmed_data'] = $this->db->query("SELECT * FROM t_sosmed WHERE sosmed_user = '$id' AND sosmed_hapus = 0")->result_array();
+
+			$data['youtube_data'] = $this->db->query("SELECT * FROM t_youtube WHERE youtube_user = '$id' AND youtube_hapus = 0")->result_array();
 
 		    $this->load->view('v_template_admin/admin_header',$data);
 		    $this->load->view('setting/index');
@@ -64,6 +66,19 @@ class Setting extends CI_Controller{
 								'account_branding_name' => $_POST['account_branding_name'],
 								'account_branding_analytics' => $_POST['account_branding_analytics'],
 								'account_branding_url' => $_POST['account_branding_url'],
+								'account_shopee' => $_POST['account_shopee'],
+								'account_tokopedia' => $_POST['account_tokopedia'],
+								'account_lazada' => $_POST['account_lazada'],
+								'account_bukalapak' => $_POST['account_bukalapak'],
+								'account_bibli' => $_POST['account_bibli'],
+								'account_jdid' => $_POST['account_jdid'],
+								'account_elevenia' => $_POST['account_elevenia'],
+								'account_amazon' => $_POST['account_amazon'],
+								'account_alibaba' => $_POST['account_alibaba'],
+								'account_whatsapp' => $_POST['account_whatsapp'],
+								'account_telegram' => $_POST['account_telegram'],
+								'account_gmail' => $_POST['account_gmail'],
+								'account_no' => $_POST['account_no'],
 							);
 				$this->db->where('account_email',$email);
 				$this->db->set($setaccount);
@@ -91,6 +106,19 @@ class Setting extends CI_Controller{
 							'account_branding_name' => $_POST['account_branding_name'],
 							'account_branding_analytics' => $_POST['account_branding_analytics'],
 							'account_branding_url' => $_POST['account_branding_url'],
+							'account_shopee' => $_POST['account_shopee'],
+							'account_tokopedia' => $_POST['account_tokopedia'],
+							'account_lazada' => $_POST['account_lazada'],
+							'account_bukalapak' => $_POST['account_bukalapak'],
+							'account_bibli' => $_POST['account_bibli'],
+							'account_jdid' => $_POST['account_jdid'],
+							'account_elevenia' => $_POST['account_elevenia'],
+							'account_amazon' => $_POST['account_amazon'],
+							'account_alibaba' => $_POST['account_alibaba'],
+							'account_whatsapp' => $_POST['account_whatsapp'],
+							'account_telegram' => $_POST['account_telegram'],
+							'account_gmail' => $_POST['account_gmail'],
+							'account_no' => $_POST['account_no'],
 						);
 			$this->db->where('account_email',$email);
 			$this->db->set($setaccount);
@@ -99,6 +127,29 @@ class Setting extends CI_Controller{
 			$this->session->set_flashdata('sukses','Data berhasil di simpan');
 		}
 
+		//youtube/////////////////////////////////////////////////////////////////
+		$videojum = @$_POST['videonumber'];
+		if ($videojum > 0) {
+			
+			for ($i=0; $i < $videojum; $i++) { 
+
+				$x = array('https://m.youtube.com/watch?v=','https://www.youtube.com/watch?v=');
+
+				$url = str_replace($x, '', $_POST['youtube_link'][$i]);
+
+				$set = array(
+								'youtube_link' => $url, 
+								'youtube_tanggal' => date('Y-m-d'),
+								'youtube_user' => $this->session->userdata('user_id'),
+							);
+
+				$this->db->set($set);
+				$this->db->insert('t_youtube');
+			}
+
+		}
+
+		//sosmed///////////////////////////////////////////////////////////////////
 		$jum = @$_POST['number'];
 
 		if ($jum > 0) {
@@ -114,7 +165,7 @@ class Setting extends CI_Controller{
 				  );
 
 				//upload foto
-				$this->load->library('upload', $config);
+				$this->load->library('upload', $config); 
 
 				if ($this->upload->do_upload('sosmed_icon'.$i)) {
 
@@ -230,5 +281,40 @@ class Setting extends CI_Controller{
 		$data = $this->db->query("SELECT * FROM t_sosmed WHERE sosmed_id = '$id' AND sosmed_hapus = 0")->result_array();
 
 		echo json_encode($data);
+	}
+
+	function getyoutube(){
+		$id = $_POST['id'];
+
+		$data = $this->db->query("SELECT * FROM t_youtube WHERE youtube_id = '$id' AND youtube_hapus = 0")->result_array();
+
+		echo json_encode($data);
+	}
+
+	function youtube_update(){
+		$id = $_POST['youtube_id'];
+
+		$x = array('https://m.youtube.com/watch?v=','https://www.youtube.com/watch?v=');
+
+		$url = str_replace($x, '', $_POST['youtube_link']);
+
+		$this->db->set('youtube_link',$url);
+		$this->db->where('youtube_id',$id);
+		$this->db->update('t_youtube');
+
+		$this->session->set_flashdata('sukses','Data berhasil di simpan');
+		redirect(base_url('setting'));
+	}
+	function youtube_delete($id){
+		$this->db->where('youtube_id',$id);
+		$this->db->set('youtube_hapus',1);
+
+		if ($this->db->update('t_youtube')) {
+			$this->session->set_flashdata('sukses','Data berhasil di hapus');
+	     }else{
+
+	     	$this->session->set_flashdata('gagal','Data gagal di hapus');
+	     }
+		redirect(base_url('setting'));
 	}
 }

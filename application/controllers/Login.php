@@ -164,6 +164,19 @@ class Login extends CI_Controller{
 									'account_branding_name' => $_POST['account_branding_name'],
 									'account_branding_analytics' => $_POST['account_branding_analytics'],
 									'account_branding_url' => $_POST['account_branding_url'],
+									'account_shopee' => $_POST['account_shopee'],
+									'account_tokopedia' => $_POST['account_tokopedia'],
+									'account_lazada' => $_POST['account_lazada'],
+									'account_bukalapak' => $_POST['account_bukalapak'],
+									'account_bibli' => $_POST['account_bibli'],
+									'account_jdid' => $_POST['account_jdid'],
+									'account_elevenia' => $_POST['account_elevenia'],
+									'account_amazon' => $_POST['account_amazon'],
+									'account_alibaba' => $_POST['account_alibaba'],
+									'account_whatsapp' => $_POST['account_whatsapp'],
+									'account_telegram' => $_POST['account_telegram'],
+									'account_gmail' => $_POST['account_gmail'],
+									'account_no' => $_POST['account_no'],
 								);
 
 					$this->db->set($setaccount);
@@ -193,6 +206,19 @@ class Login extends CI_Controller{
 								'account_branding_name' => $_POST['account_branding_name'],
 								'account_branding_analytics' => $_POST['account_branding_analytics'],
 								'account_branding_url' => $_POST['account_branding_url'],
+								'account_shopee' => $_POST['account_shopee'],
+								'account_tokopedia' => $_POST['account_tokopedia'],
+								'account_lazada' => $_POST['account_lazada'],
+								'account_bukalapak' => $_POST['account_bukalapak'],
+								'account_bibli' => $_POST['account_bibli'],
+								'account_jdid' => $_POST['account_jdid'],
+								'account_elevenia' => $_POST['account_elevenia'],
+								'account_amazon' => $_POST['account_amazon'],
+								'account_alibaba' => $_POST['account_alibaba'],
+								'account_whatsapp' => $_POST['account_whatsapp'],
+								'account_telegram' => $_POST['account_telegram'],
+								'account_gmail' => $_POST['account_gmail'],
+								'account_no' => $_POST['account_no'],
 							);
 
 				$this->db->set($setaccount);

@@ -9,11 +9,11 @@
               </ul> 
 
               <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-12"> 
                     
                   <section class="panel panel-default">
                     
-                    <div class="panel-body">
+                    <div class="panel-body"> 
 
                       <form method="POST" enctype="multipart/form-data" action="<?php echo base_url('setting/save') ?>">
                         
@@ -65,6 +65,12 @@
                           <a href="<?= ($data['account_bg_type'] == 'preset')? base_url('assets/preset/'.$data['account_preset']):base_url('assets/images/bg/'.$data['account_bg']) ?>" target="_blank" class="btn btn-primary btn-xs" title="view background"><i class="fa fa-eye"> View background</i></a>
                         </div>
 
+                        <hr>
+                        <center>
+                        <label style="width: 100%; background-color: #717171; padding: 0.3%; color: white;">ACCOUNT</label>
+                        </center>
+                        <br/>
+
                         <div class="form-group">
                           <div class="row">
                             <div class="col-md-6">
@@ -92,14 +98,108 @@
                         </div>
 
                         <div class="form-group">
+                          <div class="row">
+                            <div class="col-md-6">
+                              <label class="control-label"><i class="fa fa-whatsapp"></i> Whatsapp</label>
+                              <input name="account_whatsapp" type="text" placeholder="" class="form-control input-sm" value="<?php echo $data['account_whatsapp'] ?>">
+                            </div>
+                            <div class="col-md-6">
+                              <label class="control-label"><i class="fa fa-telegram"></i> Telegram</label>
+                              <input name="account_telegram" type="text" placeholder="" class="form-control input-sm" value="<?php echo $data['account_telegram'] ?>">
+                            </div>
+                          </div>
+                        </div>
+
+                         <div class="form-group">
+                          <div class="row">
+                            <div class="col-md-6">
+                              <label class="control-label"><i class="fa fa-envelope"></i> Gmail</label>
+                              <input name="account_gmail" type="text" placeholder="" class="form-control input-sm" value="<?php echo $data['account_gmail'] ?>">
+                            </div>
+                            <div class="col-md-6">
+                              <label class="control-label"><i class="fa fa-phone-square"></i> No. telp</label>
+                              <input name="account_no" type="number" placeholder="" class="form-control input-sm" value="<?php echo $data['account_no'] ?>">
+                            </div>
+                          </div>
+                        </div>
+
+                        <br/>
+                        <center>
+                        <label style="width: 100%; background-color: #717171; padding: 0.3%; color: white;">MARKET PLACE</label>
+                        </center>
+                        <br/>
+
+                          <div class="form-group">
+                            <div class="row">
+                              <div class="col-md-6">
+                                <label class="control-label"><img src="<?php echo base_url('assets/images/icon/shopee_black.png') ?>" width="15" height="15"> Shopee</label>
+                                <input name="account_shopee" type="text" placeholder="" class="form-control input-sm" value="<?php echo $data['account_shopee'] ?>">
+                              </div>
+                              <div class="col-md-6">
+                                <label class="control-label"><img src="<?php echo base_url('assets/images/icon/tokopedia_black.png') ?>" width="15" height="15"> Tokopedia</label>
+                                <input name="account_tokopedia" type="text" placeholder="" class="form-control input-sm" value="<?php echo $data['account_tokopedia'] ?>">
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="form-group">
+                            <div class="row">
+                              <div class="col-md-6">
+                                <label class="control-label"><img src="<?php echo base_url('assets/images/icon/lazada_black.png') ?>" width="15" height="15"> Lazada</label>
+                                <input name="account_lazada" type="text" placeholder="" class="form-control input-sm" value="<?php echo $data['account_lazada'] ?>">
+                              </div>
+                              <div class="col-md-6">
+                                <label class="control-label"><img src="<?php echo base_url('assets/images/icon/bukalapak_black.png') ?>" width="15" height="15"> Bukalapak</label>
+                                <input name="account_bukalapak" type="text" placeholder="" class="form-control input-sm" value="<?php echo $data['account_bukalapak'] ?>">
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="form-group">
+                            <div class="row">
+                              <div class="col-md-6">
+                                <label class="control-label"><img src="<?php echo base_url('assets/images/icon/blibli_black.png') ?>" width="15" height="15"> Blibli</label>
+                                <input name="account_bibli" type="text" placeholder="" class="form-control input-sm" value="<?php echo $data['account_bibli'] ?>">
+                              </div>
+                              <div class="col-md-6">
+                                <label class="control-label"><img src="<?php echo base_url('assets/images/icon/jdid_black.png') ?>" width="15" height="15"> Jd.id</label>
+                                <input name="account_jdid" type="text" placeholder="" class="form-control input-sm" value="<?php echo $data['account_jdid'] ?>">
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="form-group">
+                            <div class="row">
+                              <div class="col-md-6">
+                                <label class="control-label"><img src="<?php echo base_url('assets/images/icon/elevenia_black.png') ?>" width="15" height="15"> Elevenia</label>
+                                <input name="account_elevenia" type="text" placeholder="" class="form-control input-sm" value="<?php echo $data['account_elevenia'] ?>">
+                              </div>
+                              <div class="col-md-6">
+                                <label class="control-label"><img src="<?php echo base_url('assets/images/icon/amazon_black.png') ?>" width="15" height="15"> Amazon</label>
+                                <input name="account_amazon" type="text" placeholder="" class="form-control input-sm" value="<?php echo $data['account_amazon'] ?>">
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="form-group">
+                            <div class="row">
+                              <div class="col-md-6">
+                                <label class="control-label"><img src="<?php echo base_url('assets/images/icon/alibaba_black.png') ?>" width="15" height="15"> Alibaba</label>
+                                <input name="account_alibaba" type="text" placeholder="" class="form-control input-sm" value="<?php echo $data['account_alibaba'] ?>">
+                              </div>
+                            </div>
+                          </div>
+
+                        <div class="form-group">
                           <label><i class="fa fa-thumb-tack"></i> Social media that are added</label>
-                          <br/>
 
-                          <?php foreach ($sosmed_data as $key): ?>
+                          <div style="display: block;">
+                            <?php foreach ($sosmed_data as $key): ?>
                             
-                            <button onclick="sosmed('<?php echo $key['sosmed_id'] ?>')" type="button"><img src="<?php echo base_url('assets/images/sosmed/'.$key['sosmed_icon']) ?>" width="30" height="30"></button>
+                              <button onclick="sosmed('<?php echo $key['sosmed_id'] ?>')" type="button"><img src="<?php echo base_url('assets/images/sosmed/'.$key['sosmed_icon']) ?>" width="30" height="30"></button>
 
-                          <?php endforeach ?>
+                            <?php endforeach ?>
+                          </div>
 
                         </div>
                         <div class="form-group">
@@ -110,6 +210,29 @@
 
                           <div style="margin-top: 1%;">
                             <div class="row" id="newRow">
+                              
+                            </div>
+                          </div>
+
+                        </div>
+
+                        <center>
+                        <label style="width: 100%; background-color: #717171; padding: 0.3%; color: white;">YOUTUBE VIDEO</label>
+                        </center>
+                        
+                        <?php foreach ($youtube_data as $key): ?>
+                          <a href="#" onclick="modalyoutube('<?php echo $key['youtube_id'] ?>')"><img class="img-thumbnail" style="margin-bottom: 1%;" src="http://img.youtube.com/vi/<?php echo $key['youtube_link'] ?>/hqdefault.jpg" width="100"></a>
+                        <?php endforeach ?>
+
+                        <div class="form-group">
+
+                          <button id="addVideo" type="button" class="btn btn-primary">Link Video <i class="fa fa-plus"></i></button>
+                           <small style="display: block;" class="text-danger">* add another video</small>
+
+                          <input type="hidden" name="videonumber" id="videoNumber" value="0">
+
+                          <div style="margin-top: 1%;">
+                            <div id="newVideo">
                               
                             </div>
                           </div>
@@ -205,6 +328,35 @@
             <button type="submit" class="btn btn-success">Update <i class="fa fa-check"></i></button>
 
             <a id="sosmed_delete" href=""><button type="button" class="btn btn-danger">Remove <i class="fa fa-times"></i></button></a>
+          </div>
+
+        </form>
+
+      </div>
+    </div> 
+  </div>
+</div>
+
+<!--modal youtube-->
+<div class="modal fade" id="youtube" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        
+        <form method="POST" enctype="multipart/form-data" action="<?php echo base_url('setting/youtube_update') ?>">
+         
+         <input type="hidden" id="youtube_id" name="youtube_id">
+
+        <iframe id="youtube_frame" style="width: 100%" height="415" src=""></iframe>
+
+          <div class="form-group">
+            <label>Link Youtube</label>
+            <input type="text" required="" id="youtube_link" name="youtube_link" class="form-control">
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-success">Update <i class="fa fa-check"></i></button>
+
+            <a id="youtube_delete" href=""><button type="button" class="btn btn-danger">Remove <i class="fa fa-times"></i></button></a>
           </div>
 
         </form>
@@ -371,10 +523,23 @@ $("#addRow").click(function () {
     $('#number').val(n);
 });
 
-// remove row
-$(document).on('click', '#removeRow', function () {
-    $(this).closest('#inputFormRow').remove();
+//////////////////////// video ////////////////////////
+$("#addVideo").click(function () {
+      var i = $('#videoNumber').val();
+
+      var html = '';
+    
+      html += '<input placeholder="Input link youtube" class="form-control" type="text" name="youtube_link[]"><br/>';
+
+
+    $('#newVideo').append(html);
+
+
+    //tambah
+    var n = parseInt(i)+1;
+    $('#videoNumber').val(n);
 });
+
 
 function sosmed(id){
   $.ajax({
@@ -394,6 +559,29 @@ function sosmed(id){
     $('#sosmed_delete').attr('href', '<?php echo base_url('setting/sosmed_delete/') ?>'+sosmed_id);
 
     $('#sosmed').modal('toggle');
+
+  });
+}
+
+function modalyoutube(id){
+  $.ajax({
+    url: '<?php echo base_url('setting/getyoutube') ?>',
+    type: 'POST',
+    dataType: 'json',
+    data: {id: id},
+  })
+  .done(function(data) {
+    var youtube_id = data[0]['youtube_id'];
+
+    $('#youtube_frame').attr('src', 'https://www.youtube.com/embed/'+data[0]['youtube_link']);
+
+    $('#youtube_link').val('https://www.youtube.com/watch?v='+data[0]['youtube_link']);
+
+    $('#youtube_id').val(youtube_id);
+
+    $('#youtube_delete').attr('href', '<?php echo base_url('setting/youtube_delete/') ?>'+youtube_id);
+
+    $('#youtube').modal('toggle');
 
   });
 }

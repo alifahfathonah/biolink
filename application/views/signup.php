@@ -1,14 +1,15 @@
 <!DOCTYPE html>
-<html lang="en" style="background-color: white;">
+<html lang="en" style="background-color: #5146A6;">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /> 
   <title>Biolink</title>
   <meta name="description" content="app, web app, responsive, admin dashboard, admin, flat, flat ui, ui kit, off screen nav" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" /> 
   <link rel="shortcut icon" href="<?php echo base_url() ?>assets/images/logo.png" />
   <link rel="stylesheet" href="<?php echo base_url('assets/') ?>css/bootstrap.min.css" type="text/css" />
   <link rel="stylesheet" href="<?php echo base_url('assets/') ?>css/animate.css" type="text/css" />
-  <link rel="stylesheet" href="<?php echo base_url('assets/') ?>css/font-awesome.min.css" type="text/css" />
+  <!-- <link rel="stylesheet" href="<?php echo base_url('assets/') ?>css/font-awesome.min.css" type="text/css" /> -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
   <link rel="stylesheet" href="<?php echo base_url('assets/') ?>css/font.css" type="text/css" />
   <link rel="stylesheet" href="<?php echo base_url('assets/') ?>css/app.css" type="text/css" />
   <link rel="stylesheet" href="<?php echo base_url('assets/') ?>sweetalert/sweetalert2.min.css" type="text/css" />
@@ -21,10 +22,11 @@
     }
   </style>
 </head>
-<body style="background-image: url('<?php echo base_url('assets/images/bg.png') ?>');  height: 100%;
+<body style="/*background-image: url('<?php echo base_url('assets/images/bg.png') ?>');  height: 100%;
     background-position: center;
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: cover;*/
+    background-color: #5146A6;
 }">
   <section id="content" class="wrapper-md animated fadeInDown">
     
@@ -41,7 +43,7 @@
     </div>
     <div class="fixed-rightSd">
         <!--iklan kanan-->
-        <?php echo @$iklan['iklan_kanan'] ?>
+        <div style="float: right;"><?php echo @$iklan['iklan_kanan'] ?></div>
     </div>
 
     <div class="container aside-xxxl">
@@ -128,31 +130,132 @@
             <input id="picture" name="account_bg" hidden="" type="file" placeholder="" class="form-control input-sm" accept="image/x-png,image/gif,image/jpeg">
           </div>
 
+          <hr>
+          <center>
+          <label style="width: 100%; background-color: #717171; padding: 0.3%; color: white;">ACCOUNT</label>
+          </center>
+          <br/>
+
           <div class="form-group">
             <div class="row">
-              <div class="col">
+              <div class="col-md-6">
                 <label class="control-label"><i class="fa fa-twitter"></i> Twitter</label>
-                <input name="account_twitter" type="text" placeholder="" class="form-control input-sm">
+                <input name="account_twitter" type="text" placeholder="" class="form-control input-sm" value="">
               </div>
-              <div class="col">
+              <div class="col-md-6">
                 <label class="control-label"><i class="fa fa-facebook-square"></i> Facebook</label>
-                <input name="account_facebook" type="text" placeholder="" class="form-control input-sm">
+                <input name="account_facebook" type="text" placeholder="" class="form-control input-sm" value="">
               </div>
             </div>
           </div>
 
           <div class="form-group">
             <div class="row">
-              <div class="col">
+              <div class="col-md-6">
                 <label class="control-label"><i class="fa fa-instagram"></i> Instagram</label>
-                <input name="account_instagram" type="text" placeholder="" class="form-control input-sm">
+                <input name="account_instagram" type="text" placeholder="" class="form-control input-sm" value="">
               </div>
-              <div class="col">
+              <div class="col-md-6">
                 <label class="control-label"><i class="fa fa-youtube-play"></i> Youtube</label>
-                <input name="account_youtube" type="text" placeholder="" class="form-control input-sm">
+                <input name="account_youtube" type="text" placeholder="" class="form-control input-sm" value="">
               </div>
             </div>
           </div>
+
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-6">
+                <label class="control-label"><i class="fa fa-whatsapp"></i> Whatsapp</label>
+                <input name="account_whatsapp" type="text" placeholder="" class="form-control input-sm" value="">
+              </div>
+              <div class="col-md-6">
+                <label class="control-label"><i class="fa fa-telegram"></i> Telegram</label>
+                <input name="account_telegram" type="text" placeholder="" class="form-control input-sm" value="">
+              </div>
+            </div>
+          </div>
+
+           <div class="form-group">
+            <div class="row">
+              <div class="col-md-6">
+                <label class="control-label"><i class="fa fa-envelope"></i> Gmail</label>
+                <input name="account_gmail" type="text" placeholder="" class="form-control input-sm" value="">
+              </div>
+              <div class="col-md-6">
+                <label class="control-label"><i class="fa fa-phone-square"></i> No. telp</label>
+                <input name="account_no" type="number" placeholder="" class="form-control input-sm" value="">
+              </div>
+            </div>
+          </div>
+
+          <br/>
+          <center>
+          <label style="width: 100%; background-color: #717171; padding: 0.3%; color: white;">MARKET PLACE</label>
+          </center>
+          <br/>
+
+            <div class="form-group">
+              <div class="row">
+                <div class="col-md-6">
+                  <label class="control-label"><img src="<?php echo base_url('assets/images/icon/shopee_black.png') ?>" width="15" height="15"> Shopee</label>
+                  <input name="account_shopee" type="text" placeholder="" class="form-control input-sm" value="">
+                </div>
+                <div class="col-md-6">
+                  <label class="control-label"><img src="<?php echo base_url('assets/images/icon/tokopedia_black.png') ?>" width="15" height="15"> Tokopedia</label>
+                  <input name="account_tokopedia" type="text" placeholder="" class="form-control input-sm" value="">
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="row">
+                <div class="col-md-6">
+                  <label class="control-label"><img src="<?php echo base_url('assets/images/icon/lazada_black.png') ?>" width="15" height="15"> Lazada</label>
+                  <input name="account_lazada" type="text" placeholder="" class="form-control input-sm" value="">
+                </div>
+                <div class="col-md-6">
+                  <label class="control-label"><img src="<?php echo base_url('assets/images/icon/bukalapak_black.png') ?>" width="15" height="15"> Bukalapak</label>
+                  <input name="account_bukalapak" type="text" placeholder="" class="form-control input-sm" value="">
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="row">
+                <div class="col-md-6">
+                  <label class="control-label"><img src="<?php echo base_url('assets/images/icon/blibli_black.png') ?>" width="15" height="15"> Blibli</label>
+                  <input name="account_bibli" type="text" placeholder="" class="form-control input-sm" value="">
+                </div>
+                <div class="col-md-6">
+                  <label class="control-label"><img src="<?php echo base_url('assets/images/icon/jdid_black.png') ?>" width="15" height="15"> Jd.id</label>
+                  <input name="account_jdid" type="text" placeholder="" class="form-control input-sm" value="">
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="row">
+                <div class="col-md-6">
+                  <label class="control-label"><img src="<?php echo base_url('assets/images/icon/elevenia_black.png') ?>" width="15" height="15"> Elevenia</label>
+                  <input name="account_elevenia" type="text" placeholder="" class="form-control input-sm" value="">
+                </div>
+                <div class="col-md-6">
+                  <label class="control-label"><img src="<?php echo base_url('assets/images/icon/amazon_black.png') ?>" width="15" height="15"> Amazon</label>
+                  <input name="account_amazon" type="text" placeholder="" class="form-control input-sm" value="">
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="row">
+                <div class="col-md-6">
+                  <label class="control-label"><img src="<?php echo base_url('assets/images/icon/alibaba_black.png') ?>" width="15" height="15"> Alibaba</label>
+                  <input name="account_alibaba" type="text" placeholder="" class="form-control input-sm" value="">
+                </div>
+              </div>
+            </div>
+
+          <hr>
 
           <div class="form-group">
             <input onchange="test()" type="checkbox" data-toggle="toggle" data-size="small">
